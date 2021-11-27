@@ -1,0 +1,70 @@
+#
+# Para ficar mais facil de mecher no skript ultize o options
+# Caso modifique o sistema favor dar os creditos ao criador (KBlester)
+#
+
+
+options:
+
+LobbyMundo: Lobby
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#AVISO: Não mecha no sistema!
+
+
+command /gm [<text>] [<player>]:
+	permission: group.moderador
+	permission message: &cErro! Você precisa ser &2Mod &cou superior para executar este comando.
+    trigger:
+        if arg 1 is not set:
+            send "&cUse: /gm <Mode>"
+            stop
+        if arg 1 is "1":
+            wait 0.2 seconds
+            make player execute "gamemode 1"
+            stop 
+        if arg 1 is "2":
+            wait 0.2 seconds
+            make player execute "gamemode 2"
+            stop 
+        if arg 1 is "3"
+            wait 0.2 seconds 
+            make player execute "gamemode 3"
+            stop 
+        if arg 2 is set:
+            wait 0.2 seconds
+            make player execute "gamemode %arg 1% %arg 2%" 
+            stop
+
+command /fly [<text>]:
+	permission: mcore.fly
+	permission message: &cErro! Você precisa ser VIP &cou superior para executar este comando.
+	trigger:
+		if player's world is "{@LobbyMundo}":
+			if {Fly.%player%} is not set:
+				set player's flight mode to true
+				send "&aAgora você pode voar!"
+				set {Fly.%player%} to true
+				stop
+			else:
+				delete {Fly.%player%}
+				send "&cAgora você já não pode mais voar."
+				set player's flight mode to false
+				stop
+		else:
+			send "&cErro! Você precisa estar no Lobby para executar este comando."
+			stop
